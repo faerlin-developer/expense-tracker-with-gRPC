@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package expense;
+option go_package = "github.com/faerlin-developer/expense-tracker-with-gRPC/api";
+
+// Expense is a service for registering and tracking expenses.
+service Expenses {
+
+  // CreateExpense registers an expense.
+  rpc CreateExpense(CreateExpenseRequest) returns (CreateExpenseResponse);
+
+  // GetBalances streams the balance of each user.
+  rpc GetBalances(GetBalancesRequest) returns (stream GetBalancesResponse);
+}
+
+message CreateExpenseRequest {
+  string user_id = 1;                // ID of the user who made the expense
+  string category = 2;               // Category of the expense
+  double amount = 3;                 // The amount spent
+  optional string description = 4;   // Description of the expense
+  optional string timestamp = 5;     // ISO 8601 format
+}
+
+message CreateExpenseResponse {
+  string id = 1;                    // Server generated expense ID
+}
+
+message GetBalancesRequest {
+  // void
+}
+
+message GetBalancesResponse {
+  string user_id = 1;               // User ID
+  double amount = 2;                // Total balance of user
+  int32  num_expenses = 3;          // Total number of expenses registered for user
+}

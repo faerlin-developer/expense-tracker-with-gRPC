@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package expense;
+option go_package = "github.com/faerlin-developer/expense-tracker-with-gRPC/api";
+
+message Expense {
+  string id = 1;             // Unique identifier for the expense
+  string user_id = 2;        // ID of the user who made the expense
+  string category = 3;       // Category of the expense
+  double amount = 4;         // The amount spent
+  string description = 5;    // Description of the expense
+  string timestamp = 6;      // ISO 8601 format
+}
